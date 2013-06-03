@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["scottschulthess@gmail.com"]
   spec.description   = %q{Rails gem for syncing database tables}
   spec.summary       = %q{This Rails gem provides rake tasks for exporting certain tables from say production and loading them into development}
-  spec.homepage      = ""
+  spec.homepage      = "http://github.com/scottschulthess/db_sync"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
