@@ -1,6 +1,9 @@
 # DbSync
+This gem is for exporting and importing data from different databases.
 
-TODO: Write a gem description
+Recommended use is for syncing certain tables from production into development for testing.
+
+It exports specified tables into yaml stored in db/data.
 
 ## Installation
 
@@ -8,17 +11,21 @@ Add this line to your application's Gemfile:
 
     gem 'db_sync'
 
-And then execute:
 
-    $ bundle
+And in config/initializers/db_sync.rb
 
-Or install it yourself as:
+    DbSync.configure do |config|
+      config.sync_tables = ["TABLE_NAME"]
+    end
 
-    $ gem install db_sync
+## Usage 
 
-## Usage
+Run this to dump the tables you specified in the initializer to db/data
+    bundle exec rake db_sync:dump_data 
 
-TODO: Write usage instructions here
+Run this to load the tables back in.
+WARNING: this overwrites the contents of this existing table.  
+    bundle exec rake db_sync:load_data
 
 ## Contributing
 

@@ -1,5 +1,5 @@
 require "db_sync/version"
-
+require 'db_sync/railtie' if defined?(Rails)
 module DbSync
 
   class Configuration
