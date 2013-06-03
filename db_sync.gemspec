@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = DbSync::VERSION
   spec.authors       = ["Scott Schulthess"]
   spec.email         = ["scottschulthess@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Rails gem for syncing database tables}
+  spec.summary       = %q{This Rails gem provides rake tasks for exporting certain tables from say production and loading them into development}
   spec.homepage      = ""
   spec.license       = "MIT"
 
