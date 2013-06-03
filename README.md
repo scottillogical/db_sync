@@ -21,10 +21,12 @@ And in config/initializers/db_sync.rb
 ## Usage 
 
 Run this to dump the tables you specified in the initializer to db/data
+   
     bundle exec rake db_sync:dump_data 
 
 Run this to load the tables back in.
 WARNING: this overwrites the contents of this existing table.  
+   
     bundle exec rake db_sync:load_data
 
 ## Contributing
