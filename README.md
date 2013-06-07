@@ -1,4 +1,9 @@
 # DbSync
+
+Have you ever gone to test a specific or develop a feature, except it requires use of data that currently only exists in production?   
+
+Instead of going through a very time-consuming database dump and load process, you can use this gem instead.
+
 This gem is for exporting and importing data from different databases.
 
 Recommended use is for syncing certain tables from production into development for testing.
@@ -23,6 +28,10 @@ And in config/initializers/db_sync.rb
 Run this to dump the tables you specified in the initializer to db/data
    
     bundle exec rake db_sync:dump_data 
+    
+Or run against a specific rails environment
+
+    bundle exec rake db_sync:dump_data RAILS_ENV=production
 
 Run this to load the tables back in.
 WARNING: this overwrites the contents of this existing table.  
