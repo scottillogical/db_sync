@@ -2,13 +2,9 @@
 
 Have you ever gone to test a specific or develop a feature, except it requires use of data that currently only exists in production?   
 
-Instead of going through a very time-consuming database dump and load process, you can use this gem instead.
+Instead of going through a very time-consuming database dump and load process, you can use this gem instead. 
 
-This gem is for exporting and importing data from different databases.
-
-Recommended use is for syncing certain tables from production into development for testing.
-
-It exports specified tables into yaml stored in db/data.
+It works by dumping certain tables you want into some yaml files in db/data.  You can then easily load them into your database.  You can also use them as a way to seed certain tables on new systems.
 
 ## Installation
 
