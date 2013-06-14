@@ -4,7 +4,7 @@ Have you ever gone to test a specific or develop a feature, except it requires u
 
 Instead of going through a very time-consuming database dump and load process, you can use this gem instead. 
 
-It works by dumping certain tables you want into some yaml files in db/data.  You can then easily load them into your database.  You can also use them as a way to seed certain tables on new systems.
+It works by dumping certain tables you want into some yaml files in db/data.  You can then easily load them into your database.  Optionally, one can use them to seed certain tables on new systems.
 
 ## Installation
 
