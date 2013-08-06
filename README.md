@@ -6,6 +6,8 @@ Instead of going through a very time-consuming database dump and load process, y
 
 It works by dumping certain tables you want into some yaml files in db/data.  You can then easily load them into your database.  
 
+This works a an alternative to ludicast/yaml_db for some use cases.
+
 ## Installation
 
 Add this line to your application's Gemfile:
