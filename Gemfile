@@ -9,4 +9,5 @@ group :test do
   gem 'rspec'
   gem 'sqlite3-ruby', :require => 'sqlite3'
   gem 'rspec-rails'
+  gem 'debugger'
 end

@@ -36,12 +36,18 @@ module DbSync
   end
 
   def self.load_data
-    require 'active_record/fixtures'  
-    base_dir     = "#{Rails.root}/db/data"  
-    fixtures_dir = File.join [base_dir, ENV['FIXTURES_DIR']].compact  
-    fixture_files = (ENV['FIXTURES'] ? ENV['FIXTURES'].split(/,/) : Dir["#{fixtures_dir}/**/*.{yml,csv}"].map {|f| f[(fixtures_dir.size + 1)..-5] })
-    fixture_files.each do |fixture_file|    
-      ActiveRecord::Fixtures.create_fixtures(fixtures_dir, fixture_file)  
+    Dir["#{Rails.root}/db/data/*{yml}"].each do |data_file|    
+      load_document(data_file)  
+    end
+  end
+
+  def self.load_document(filename)
+    YAML.load_documents(File.new(Rails.root.join(filename), "r")).each do |row| 
+      columns =  row.values.first.collect { |v| v[0]}
+      values = row.values.first.collect { |v| ActiveRecord::Base.connection.quote(v[1])}
+      table_name = File.basename(filename).split(".").first
+      sql = "INSERT INTO '#{table_name}' (#{columns.join(',')}) values (#{values.join(',')})"
+      ActiveRecord::Base.connection.execute(sql)
     end
   end
 end
