@@ -1,5 +1,6 @@
 require "db_sync/version"
 require 'db_sync/railtie' if defined?(Rails)
+YAML::ENGINE.yamler = "psych"
 module DbSync
 
   class Configuration
@@ -42,11 +43,11 @@ module DbSync
   end
 
   def self.load_document(filename)
-    YAML.load_documents(File.new(Rails.root.join(filename), "r")).each do |row| 
+    YAML.load_documents(File.new(Rails.root.join(filename), "r").read).each do |row| 
       columns =  row.values.first.collect { |v| v[0]}
       values = row.values.first.collect { |v| ActiveRecord::Base.connection.quote(v[1])}
       table_name = File.basename(filename).split(".").first
-      sql = "INSERT INTO '#{table_name}' (#{columns.join(',')}) values (#{values.join(',')})"
+      sql = "INSERT INTO #{table_name} (#{columns.join(',')}) values (#{values.join(',')})"
       ActiveRecord::Base.connection.execute(sql)
     end
   end
