@@ -22,7 +22,7 @@ module DbSync
 
   def self.dump_data
     DbSync.configuration.sync_tables.each do |table_name|
-      location = FileUtils.mkdir_p "#{Rails.root}/db/data"
+      location = FileUtils.mkdir_p File.join(Rails.root, 'db', 'data')
       i = "000"
       sql  = "SELECT * FROM %s"
       File.open("#{location.first}/#{table_name}.yml", 'w') do |file|
@@ -43,11 +43,15 @@ module DbSync
   end
 
   def self.load_document(filename)
-    YAML.load_documents(File.new(Rails.root.join(filename), "r").read).each do |row|
-      columns =  row.values.first.collect { |v| v[0]}
-      values = row.values.first.collect { |v| ActiveRecord::Base.connection.quote(v[1])}
+    YAML.load_stream(File.new(Rails.root.join(filename), "r").read).each do |row|
+      columns =  row.values.first.map { |v| v[0]}
+      values = row.values.first.map { |v| ActiveRecord::Base.connection.quote(v[1])}
       table_name = File.basename(filename).split(".").first
-      sql = "INSERT INTO #{table_name} (#{columns.join(',')}) values (#{values.join(',')})"
+
+      # This assumes the first attribute (typically id) is unique and only the unique restraint
+      sql = "INSERT INTO #{table_name} (#{columns.join(',')}) values (#{values.join(',')}) ON DUPLICATE KEY UPDATE #{columns.first}=#{values.first}"
+      puts "SQL #{sql}"
+
       ActiveRecord::Base.connection.execute(sql)
     end
   end
