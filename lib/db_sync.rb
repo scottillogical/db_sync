@@ -26,7 +26,7 @@ module DbSync
       i = "000"    
       sql  = "SELECT * FROM %s"    
       File.open("#{location.first}/#{table_name}.yml", 'w') do |file|      
-        data = ActiveRecord::Base.connection.select_all(sql % table_name.upcase)      
+        data = ActiveRecord::Base.connection.select_all(sql % table_name)      
         file.write data.inject({}) { |hash, record|  
           hash["#{table_name}_#{i.succ!}"] = record        
           hash      
