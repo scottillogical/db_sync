@@ -10,5 +10,10 @@ namespace :db_sync do
     DbSync.load_data
     puts "Loaded data"
   end
-end
 
+  desc "Load data from db/data in the order specified in the config.sync_tables, overwriting the existing tables"
+  task :load_data_order => :environment do
+    DbSync.load_data_order
+    puts "Loaded data"
+  end
+end
