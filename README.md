@@ -42,7 +42,7 @@ WARNING: this overwrites the contents of this existing table.
 Or run this to load the tables back in the order specified in the sync_tables array.
 WARNING: this overwrites the contents of this existing table.  
 
-    bundle exec rake db_sync:load_data
+    bundle exec rake db_sync:load_data_order
 
 ## Contributing
 
