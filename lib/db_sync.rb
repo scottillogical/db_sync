@@ -57,7 +57,6 @@ module DbSync
 
       # This assumes the first attribute (typically id) is unique and is the only unique restraint
       sql = "INSERT INTO #{table_name} (#{columns.join(',')}) values (#{values.join(',')}) ON DUPLICATE KEY UPDATE #{columns.first}=#{values.first}"
-      puts "Columns: #{columns}, Values: #{values}, SQL: #{sql}"
       ActiveRecord::Base.connection.execute(sql)
     end
   end
